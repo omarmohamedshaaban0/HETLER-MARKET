@@ -1,0 +1,31 @@
+// Search Auto-Suggest
+const searchInput = document.getElementById('search');
+const suggestions = document.getElementById('suggestions');
+const mockSuggestions = ['Headphones', 'Shoes', 'Laptop'];
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    suggestions.innerHTML = mockSuggestions.filter(s => s.toLowerCase().includes(query)).map(s => `<div>${s}</div>`).join('');
+    suggestions.style.display = query ? 'block' : 'none';
+});
+
+// Currency/Language Switcher
+document.getElementById('currency').addEventListener('change', (e) => localStorage.setItem('currency', e.target.value));
+document.getElementById('language').addEventListener('change', (e) => localStorage.setItem('language', e.target.value));
+
+// Live Chat
+const chatToggle = document.getElementById('chat-toggle');
+const chatWindow = document.getElementById('chat-window');
+chatToggle.addEventListener('click', () => chatWindow.classList.toggle('hidden'));
+
+// AI Recommendations (Simple Mock)
+let viewedProducts = JSON.parse(localStorage.getItem('viewed') || '[]');
+function recommend() { /* Logic to suggest based on viewedProducts */ }
+
+// Secure Checkout (Mock)
+function checkout() { alert('Secure checkout initiated!'); }
+
+// Load on Page Load
+window.addEventListener('load', () => {
+    document.getElementById('currency').value = localStorage.getItem('currency') || 'USD';
+    document.getElementById('language').value = localStorage.getItem('language') || 'EN';
+});
